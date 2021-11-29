@@ -16,9 +16,9 @@ class User extends BaseController
 {
 
     //判断用户是否已存在中间件，only在register()里有效
-//    protected $middleware = [
-//        CheckUserExsit::class => ['only' => ['register']],
-//    ];
+    protected $middleware = [
+        CheckUserExsit::class => ['only' => ['register']],
+    ];
 
     public function register()
     {
