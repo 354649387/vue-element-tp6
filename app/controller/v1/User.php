@@ -23,7 +23,9 @@ class User extends BaseController
     public function register()
     {
 
-        $post = Request::param();
+        $post = Request::param('param');
+
+//        dd($post);
 
         try {
 
@@ -33,8 +35,9 @@ class User extends BaseController
 
         } catch (ValidateException $v) {
 
+            $err  = $v->getError();
             //验证失败
-            throw new $v->getError();
+            throw new $err;
 
         }
 
