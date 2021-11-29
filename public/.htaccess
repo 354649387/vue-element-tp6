@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c> #如果mode_rewrite.c模块存在 则执行以下命令
+  Options +FollowSymlinks -Multiviews
+  RewriteEngine On #开启 rewriteEngine
+  # !-d 不是目录或目录不存在
+  RewriteCond %{REQUEST_FILENAME} !-d
+  # !-f 不是文件或文件不存在
+  RewriteCond %{REQUEST_FILENAME} !-f
+
+  RewriteRule ^(.*)$ index.php [QSA,PT,L]
+  # 参数解释
+  # ^(.*)$： 匹配所有的路口映射
+  # QSA: （Query String Appending）表示保留参数入get传值？xxx==xx;
+  # PT: 把这个URL交给Apache处理；
+  # L: 作为最后一条，遇到这条将不再匹配这条之后的规则
+
+  #header中Authorization设置可见，方便token使用
+  SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0
+</IfModule>
