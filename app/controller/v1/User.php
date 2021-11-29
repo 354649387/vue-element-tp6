@@ -15,10 +15,10 @@ use think\facade\Request;
 class User extends BaseController
 {
 
-    //register()里判断用户是否已存在中间件
-    protected $middleware = [
-        CheckUserExsit::class => ['only' => ['register']],
-    ];
+    //判断用户是否已存在中间件，only在register()里有效
+//    protected $middleware = [
+//        CheckUserExsit::class => ['only' => ['register']],
+//    ];
 
     public function register()
     {
@@ -34,8 +34,7 @@ class User extends BaseController
         } catch (ValidateException $v) {
 
             //验证失败
-
-            print_r($v->getError());
+            throw new $v->getError();
 
         }
 
@@ -46,21 +45,12 @@ class User extends BaseController
 
         if(!$user->id){
 
-            return json('添加失败');
+            return JsonCode(2,'注册失败');
 
         }
 
-        return json('添加成功');
+        return JsonCode(1,'注册成功');
 
-
-
-
-
-//        return json('新增成功');
-        //获取用户填写信息
-        //验证用户填写的信息
-        //校验通过后信息存入数据库
-        //注册成功传递成功码，前端直接跳转到后台首页，否则提示注册错误信息
     }
 
 
