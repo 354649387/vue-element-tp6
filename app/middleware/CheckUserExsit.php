@@ -5,6 +5,7 @@ namespace app\middleware;
 
 use app\Model\Users;
 use think\facade\Log;
+use think\response\Jsonp;
 
 class CheckUserExsit
 {

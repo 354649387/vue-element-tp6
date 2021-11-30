@@ -10,6 +10,7 @@ use app\Model\Users;
 use thans\jwt\facade\JWTAuth;
 use think\exception\ValidateException;
 use think\facade\Request;
+use think\response\Json;
 
 
 class User extends BaseController
@@ -23,19 +24,23 @@ class User extends BaseController
     public function register()
     {
 
-        $post = Request::param('param');
+        $post = Request::param();
 
-//        dd($post);
+        $check = [
+            'username' => $post['username'],
+            'password' => $post['password']
+        ];
 
         try {
 
             validate(\app\validate\Users::class)
                 ->scene('register')
-                ->check($post);
+                ->check($check);
 
         } catch (ValidateException $v) {
 
             $err  = $v->getError();
+
             //验证失败
             throw new $err;
 
