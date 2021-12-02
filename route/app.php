@@ -35,6 +35,8 @@ Route::group('user',function (){
 
     Route::post('getUserInfo','getUserInfo')->middleware(\app\middleware\CheckToken::class);
 
+    Route::post('pushToken','pushToken')->middleware(\app\middleware\CheckToken::class);
+
 })->prefix($v.'.user/')->pattern(['id' => '\d+']);
 
 //用户 以下是不用prefix的写法，不提倡

@@ -17,11 +17,11 @@ class CheckToken
      */
     public function handle($request, \Closure $next)
     {
-        if($request->isOptions()){
-
-            return response();
-
-        }
+//        if($request->isOptions()){
+//
+//            return response();
+//
+//        }
 
         try {
 
@@ -29,7 +29,8 @@ class CheckToken
 
         }catch (JWTException $e){
 
-            return json($e->getMessage());
+            //2001为token校验不通过错误码
+            return json(['code' => 2001,'msg'=>'token校验不通过'.$e->getMessage()]);
 
         }
 
